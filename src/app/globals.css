@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #000000;
+  --foreground: #ffffff;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #00FFD1 #0D0D0D;
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #0D0D0D;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #00FFD1;
+  border-radius: 3px;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: 'Space Grotesk', sans-serif;
+  overflow-x: hidden;
+}
+
+.gradient-mesh {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0, 255, 209, 0.15), transparent),
+    radial-gradient(ellipse 50% 80% at 80% 50%, rgba(255, 107, 107, 0.08), transparent),
+    radial-gradient(ellipse 50% 80% at 20% 50%, rgba(0, 255, 209, 0.05), transparent),
+    #000000;
+}
+
+.gradient-card {
+  background: linear-gradient(135deg, #0D0D0D, #1A1A1A);
+  border: 1px solid rgba(0, 255, 209, 0.2);
+  box-shadow: 0 0 30px rgba(0, 255, 209, 0.05);
+}
+
+.gradient-card:hover {
+  border-color: rgba(0, 255, 209, 0.5);
+  box-shadow: 0 0 50px rgba(0, 255, 209, 0.1);
+}
+
+.diagonal-section {
+  clip-path: polygon(0 0, 100% 5%, 100% 95%, 0 100%);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #00FFD1, #FF6B6B);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.cyan-glow {
+  box-shadow: 0 0 20px rgba(0, 255, 209, 0.3), 0 0 40px rgba(0, 255, 209, 0.1);
+}
+
+.typing-dot {
+  animation: typingDot 1.4s infinite ease-in-out;
+}
+
+.typing-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typingDot {
+  0%, 60%, 100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  30% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.tilt-card {
+  transition: transform 0.3s ease;
+  transform-style: preserve-3d;
+}
+
+.tilt-card:hover {
+  transform: rotateY(3deg) rotateX(3deg);
+}
+
+.section-number {
+  font-size: clamp(80px, 15vw, 180px);
+  line-height: 0.8;
+  font-weight: 700;
+  -webkit-text-stroke: 2px rgba(0, 255, 209, 0.3);
+  -webkit-text-fill-color: transparent;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
