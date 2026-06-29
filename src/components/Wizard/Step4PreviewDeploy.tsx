@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Check, Copy, Download } from "lucide-react";
 import { BusinessInfo, KnowledgeBase, BotCustomization, ChatMessage } from "@/lib/types";
-import { getGeminiResponse } from "@/lib/gemini";
+import { getChatbotResponse } from "@/lib/gemini";
 import { generateEmbedCode } from "@/lib/gemini";
 import ChatbotWidget from "@/components/ChatbotWidget";
 
@@ -31,7 +31,7 @@ export default function Step4PreviewDeploy({ business, knowledge, bot }: Props) 
   };
 
   const handleSend = async (message: string, history: ChatMessage[]): Promise<string> => {
-    return getGeminiResponse(message, business, knowledge, bot, history);
+    return getChatbotResponse(message, business, knowledge, bot, history);
   };
 
   return (

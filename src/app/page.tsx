@@ -15,7 +15,7 @@ import FeatureCard from "@/components/FeatureCard";
 import PricingCard from "@/components/PricingCard";
 import ChatbotWidget from "@/components/ChatbotWidget";
 import { DEMO_CHATBOT } from "@/lib/demoData";
-import { getGeminiResponse } from "@/lib/gemini";
+import { getChatbotResponse } from "@/lib/gemini";
 import { ChatMessage } from "@/lib/types";
 
 const features = [
@@ -97,7 +97,7 @@ export default function LandingPage() {
   const [showDemo, setShowDemo] = useState(false);
 
   const handleDemoSend = async (message: string, history: ChatMessage[]) => {
-    return getGeminiResponse(
+    return getChatbotResponse(
       message,
       DEMO_CHATBOT.businessInfo,
       DEMO_CHATBOT.knowledgeBase,

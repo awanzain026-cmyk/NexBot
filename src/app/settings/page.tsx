@@ -50,14 +50,9 @@ export default function SettingsPage() {
             <div className="gradient-card rounded-2xl p-6">
               <div className="flex items-center gap-3 mb-6">
                 <Shield className="w-5 h-5 text-primary" />
-                <h3 className="text-lg font-semibold text-white">API Key</h3>
+                <h3 className="text-lg font-semibold text-white">AI Engine</h3>
               </div>
-              <p className="text-muted text-sm mb-4">Your Gemini API key for chatbot responses.</p>
-              <input
-                className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-primary/50 transition-colors font-mono text-sm"
-                placeholder="NEXT_PUBLIC_GEMINI_API_KEY"
-                defaultValue={process.env.NEXT_PUBLIC_GEMINI_API_KEY || ""}
-              />
+              <p className="text-muted text-sm">Using Sodeom&apos;s free AI proxy — no API key required. Responses are powered by GPT-4o-mini.</p>
             </div>
           </div>
         </div>
