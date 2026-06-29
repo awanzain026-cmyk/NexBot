@@ -1,13 +1,5 @@
 import { BusinessInfo, KnowledgeBase, BotCustomization, ChatMessage } from "./types";
 
-interface SodeomResponse {
-  choices: {
-    message: {
-      content: string;
-    };
-  }[];
-}
-
 function buildSystemPrompt(
   business: BusinessInfo,
   knowledge: KnowledgeBase,
@@ -54,13 +46,10 @@ SECURITY GUARDRAILS - YOU MUST FOLLOW THESE RULES STRICTLY:
 }
 
 function buildMessages(
-  systemPrompt: string,
   userMessage: string,
   history: ChatMessage[]
 ) {
-  const messages: { role: string; content: string }[] = [
-    { role: "system", content: systemPrompt },
-  ];
+  const messages: { role: string; content: string }[] = [];
 
   const recentHistory = history.slice(-8);
   for (const msg of recentHistory) {
@@ -85,35 +74,18 @@ export async function getChatbotResponse(
 ): Promise<string> {
   try {
     const systemPrompt = buildSystemPrompt(business, knowledge, bot);
-    const messages = buildMessages(systemPrompt, userMessage, history);
+    const messages = buildMessages(userMessage, history);
 
-    const response = await fetch("https://sodeom.com/v1/chat/completions", {
+    const response = await fetch("/api/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        model: "gpt-4o-mini",
-        messages,
-        temperature: 0.7,
-        max_tokens: 500,
-      }),
+      body: JSON.stringify({ messages, systemPrompt }),
     });
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error("AI API error:", errorText);
-      return "Sorry, I'm having trouble connecting right now. Please try again in a moment.";
-    }
-
-    const data: SodeomResponse = await response.json();
-    const text = data.choices?.[0]?.message?.content;
-
-    if (!text) {
-      return "I understand your question. For more details, please visit our website or call us directly.";
-    }
-
-    return text.trim();
+    const data = await response.json();
+    return data.reply || "I understand your question. For more details, please visit our website or call us directly.";
   } catch (error) {
-    console.error("AI API error:", error);
+    console.error("Chat API error:", error);
     return "Sorry, I encountered an error. Please try again.";
   }
 }
